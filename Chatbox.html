@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <title>Chat Box</title>
+</head>
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        background-color: rgba(43, 43, 136, 0.448);
+    }
+
+    .container {
+        height: 100vh;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .chat-box {
+        height: 400px;
+        width: 500px;
+        border: 1px solid black;
+        background-color: rgba(128, 128, 128, 0.333);
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .box {
+        height: 85%;
+        width: 100%;
+        padding: .5rem;
+        background-color: #fff;
+        overflow-y: scroll;
+        border-radius: 10px;
+    }
+
+    form {
+        width: 100%;
+    }
+
+    .input-class {
+        display: flex;
+        width: 100%;
+        justify-content: space-around;
+        padding: .5rem;
+    }
+
+    .input-class textarea {
+        width: 85%;
+        padding: .5rem;
+        resize: none;
+    }
+
+    .message {
+        width: fit-content;
+        margin-bottom: 10px;
+        background-color: cyan;
+        padding: .5rem;
+        border-radius: 4px;
+    }
+</style>
+
+<body>
+    <div class="container-fluid">
+        <div class="container">
+            <div class="chat-box">
+                <div class="box">
+                    <h5>Welcome to Live Chat!!...</h5>
+                </div>
+                <div class="input-class">
+                    <textarea type="text" id="text" placeholder="Type Your Message" rows="1"></textarea>
+                    <button value="send" class="btn btn-success" id="textbutton">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function sendMessage() {
+            const messageInput = document.getElementById('text');
+            const message = messageInput.value.trim();
+            if (message !== '') {
+                const chatMessages = document.querySelector('.box');
+                const messageElement = document.createElement('div');
+                messageElement.classList.add('message');
+                messageElement.textContent = message;
+                chatMessages.appendChild(messageElement);
+                messageInput.value = '';
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }
+        }
+
+        document.getElementById('textbutton').addEventListener('click', sendMessage);
+        document.getElementById('text').addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                event.preventDefault();
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+
+</html>
